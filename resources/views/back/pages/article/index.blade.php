@@ -15,18 +15,20 @@
                         </tr>
                         </thead>
                         <tbody>
+                            @foreach($article as $post)
+                                <tr>
+                                    <td><img width="100%" height="100%" src="{{asset($post->image)}}"></td>
+                                    <td>{{$post->getCategory->name}}</td>
+                                    <td>{{$post->title}}</td>
+                                    <td><input class="switch" @if($post->status==1) checked @endif type="checkbox" article-id="{{$post->id}}" data-on="Aktif" data-off="Pasif" data-offstyle="danger" data-onstyle="success"  data-toggle="toggle"></td>
+                                    <td>
+                                        <a href="{{route('admin.article.edit',$post->id)}}"><i class="bi bi-pencil-fill"></i></a>
+                                        <i id="{{$post->id}}" class="bi bi-trash-fill delete-button"></i>
+                                        <i class="bi bi-eye-fill"></i>
+                                    </td>
+                                </tr>
+                            @endforeach
 
-                            <tr>
-                                <td><img width="100%" height="100%" src=""></td>
-                                <td>Teknoloji</td>
-                                <td>Başlık</td>
-                                <td><input class="switch" type="checkbox" article-id="" data-on="Aktif" data-off="Pasif" data-offstyle="danger" data-onstyle="success"  data-toggle="toggle"></td>
-                                <td>
-                                    <a href=""><i class="bi bi-pencil-fill"></i></a>
-                                    <i id="" class="bi bi-trash-fill delete-button"></i>
-                                    <i class="bi bi-eye-fill"></i>
-                                </td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
@@ -45,42 +47,43 @@
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
-{{--    <script>--}}
-{{--        $('.delete-button').click(function () {--}}
-{{--            let id = $(this).attr('id');--}}
-{{--            Swal.fire({--}}
-{{--                title: 'Emin misin?',--}}
-{{--                text: "Makale silinecek emin misin?",--}}
-{{--                icon: 'warning',--}}
-{{--                showCancelButton: true,--}}
-{{--                confirmButtonColor: '#3085d6',--}}
-{{--                cancelButtonColor: '#d33',--}}
-{{--                confirmButtonText: 'Evet,sil!'--}}
-{{--            }).then((result) => {--}}
-{{--                if (result.isConfirmed) {--}}
-{{--                    $.ajax({--}}
-{{--                        url:"{{ route('admin.article.destroy', 0) }}"+id,--}}
-{{--                        method: 'DELETE',--}}
-{{--                        headers: {--}}
-{{--                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')--}}
-{{--                        },--}}
-{{--                        success: function(result) {--}}
-{{--                            Swal.fire(--}}
-{{--                                'Silindi!',--}}
-{{--                                'Makale başarılı bir şekilde silindi.',--}}
-{{--                                'success'--}}
-{{--                            )--}}
-{{--                        }--}}
-{{--                    });--}}
-{{--                }--}}
-{{--            })--}}
-{{--        });--}}
-{{--        $('.switch').change(function() {--}}
-{{--            id = $(this)[0].getAttribute('article-id');--}}
-{{--            statu = $(this).prop('checked');--}}
-{{--            $.get("{{url('admin/article/switch')}}/"+id, {statu:statu}, function (data,status){});--}}
-{{--        });--}}
-{{--    </script>--}}
+    <script>
+        $('.delete-button').click(function () {
+            let id = $(this).attr('id');
+            Swal.fire({
+                title: 'Emin misin?',
+                text: "Makale silinecek emin misin?",
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonColor: '#3085d6',
+                cancelButtonColor: '#d33',
+                confirmButtonText: 'Evet,sil!'
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    $.ajax({
+                        url:"{{ route('admin.article.destroy', 0) }}"+id,
+                        method: 'DELETE',
+                        headers: {
+                            'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                        },
+                        success: function(result) {
+                            Swal.fire(
+                                'Silindi!',
+                                'Makale başarılı bir şekilde silindi.',
+                                'success'
+                            )
+                        }
+                    });
+                    window.location.reload();
+                }
+            })
+        });
+        $('.switch').change(function() {
+            id = $(this)[0].getAttribute('article-id');
+            statu = $(this).prop('checked');
+            $.get("{{url('admin/article/switch')}}/"+id, {statu:statu}, function (data,status){});
+        });
+    </script>
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{asset('back/')}}/dist/assets/vendors/simple-datatables/style.css">

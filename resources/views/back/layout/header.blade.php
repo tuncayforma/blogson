@@ -18,6 +18,8 @@
     <link rel="stylesheet" href="{{asset('back/dist')}}/assets/css/app.css">
     <link rel="stylesheet" href="{{asset('back/dist')}}/assets/vendors/sweetalert2/sweetalert2.min.css">
     <link rel="shortcut icon" href="{{asset('back/dist')}}/assets/images/favicon.svg" type="image/x-icon">
+    <link rel="stylesheet" href="{{asset('back/dist/')}}/assets/vendors/sweetalert2/sweetalert2.min.css">
+
     @yield('css')
 </head>
 

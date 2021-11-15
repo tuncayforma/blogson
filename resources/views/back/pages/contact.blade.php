@@ -14,15 +14,14 @@
                         </tr>
                         </thead>
                         <tbody>
-{{--                        @foreach($contacts as $contact)--}}
-{{--                            <tr>--}}
-
-{{--                                <td>{{$contact->name}}</td>--}}
-{{--                                <td>{{$contact->email}}</td>--}}
-{{--                                <td>{{$contact->tel_no}}</td>--}}
-{{--                                <td> <i data-value="{{$contact->message}}" class="bi bi-eye-fill show-message" ></i> </td>--}}
-{{--                            </tr>--}}
-{{--                        @endforeach--}}
+                        @foreach($contacts as $contact)
+                            <tr>
+                                <td>{{$contact->name}}</td>
+                                <td>{{$contact->email}}</td>
+                                <td>{{$contact->tel_no}}</td>
+                                <td> <i data-value="{{$contact->message}}" class="bi bi-eye-fill show-message" ></i> </td>
+                            </tr>
+                        @endforeach
                         </tbody>
                     </table>
                 </div>
@@ -41,12 +40,12 @@
         let table1 = document.querySelector('#table1');
         let dataTable = new simpleDatatables.DataTable(table1);
     </script>
-{{--    <script>--}}
-{{--        $('.show-message').click(function () {--}}
-{{--            var message = $(this).attr('data-value');--}}
-{{--            Swal.fire('<p>'+message+'</p>')--}}
-{{--        })--}}
-{{--    </script>--}}
+    <script>
+        $('.show-message').click(function () {
+            var message = $(this).attr('data-value');
+            Swal.fire('<p>'+message+'</p>')
+        })
+    </script>
 @endsection
 @section('css')
     <link rel="stylesheet" href="{{asset('back/')}}/dist/assets/vendors/simple-datatables/style.css">

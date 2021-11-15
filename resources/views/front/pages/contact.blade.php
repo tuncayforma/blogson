@@ -6,7 +6,22 @@
                 <div class="col-md-10 col-lg-8 col-xl-7">
                     <p>Bir mesaj kadar yakınınızdayız.</p>
                     <div class="my-5">
-                        <form id="contactForm" action="">
+                        <form id="contactForm" action="{{route('contact.send')}}" method="POST">
+                            @csrf
+                            @if(session('success'))
+                                <div class="alert alert-success">
+                                    {{session('success')}}
+                                </div>
+                            @endif
+                            @if($errors->any())
+                                <div class="alert alert-danger">
+                                    <ul>
+                                        @foreach($errors->all() as $error)
+                                            <li>{{$error}}</li>
+                                        @endforeach
+                                    </ul>
+                                </div>
+                            @endif
                             <div class="form-floating">
                                 <input class="form-control" id="name" type="text" name="name" placeholder="Enter your name..." data-sb-validations="required" />
                                 <label for="name">İsminiz</label>
@@ -32,7 +47,7 @@
                             <button class="btn btn-primary text-uppercase" id="submitButton" type="submit">Gönder</button>
                         </form>
                         <br>
-                        <strong>Telefon Numarası : </strong>
+                        <strong>Telefon Numarası : {{$config->tel_no}}</strong>
                     </div>
                 </div>
             </div>

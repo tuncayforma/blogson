@@ -6,22 +6,22 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form class="form" action=""  enctype="multipart/form-data">
-{{--                                @csrf--}}
-{{--                                @if(session('success'))--}}
-{{--                                    <div class="alert alert-success">--}}
-{{--                                        {{session('success')}}--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
-{{--                                @if($errors->any())--}}
-{{--                                    <div class="alert alert-danger">--}}
-{{--                                        <ul>--}}
-{{--                                            @foreach($errors->all() as $error)--}}
-{{--                                                <li>{{$error}}</li>--}}
-{{--                                            @endforeach--}}
-{{--                                        </ul>--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
+                            <form class="form" action="{{route('admin.article.store')}}" method="POST" enctype="multipart/form-data">
+                                @csrf
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{session('success')}}
+                                    </div>
+                                @endif
+                                @if($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach($errors->all() as $error)
+                                                <li>{{$error}}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <div class="col-md-12 col-12">
                                         <div class="form-group">
@@ -35,9 +35,9 @@
                                         <div class="form-group">
                                             <label for="city-column">Kategori</label>
                                             <select class="form-control" name="category_id" id="">
-{{--                                                @foreach($categories as $category)--}}
-{{--                                                    <option value="{{$category->id}}">{{$category->name}}</option>--}}
-{{--                                                @endforeach--}}
+                                                @foreach($categories as $category)
+                                                    <option value="{{$category->id}}">{{$category->name}}</option>
+                                                @endforeach
                                             </select>
                                         </div>
                                     </div>

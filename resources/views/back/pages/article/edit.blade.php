@@ -6,29 +6,29 @@
                 <div class="card">
                     <div class="card-content">
                         <div class="card-body">
-                            <form method="post" class="form"  enctype="multipart/form-data">
-{{--                                @method('PUT')--}}
-{{--                                @csrf--}}
-{{--                                @if(session('success'))--}}
-{{--                                    <div class="alert alert-success">--}}
-{{--                                        {{session('success')}}--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
-{{--                                @if($errors->any())--}}
-{{--                                    <div class="alert alert-danger">--}}
-{{--                                        <ul>--}}
-{{--                                            @foreach($errors->all() as $error)--}}
-{{--                                                <li>{{$error}}</li>--}}
-{{--                                            @endforeach--}}
-{{--                                        </ul>--}}
-{{--                                    </div>--}}
-{{--                                @endif--}}
+                            <form method="post" class="form" action="{{route('admin.article.update',$article->id)}}" enctype="multipart/form-data">
+                                @method('PUT')
+                                @csrf
+                                @if(session('success'))
+                                    <div class="alert alert-success">
+                                        {{session('success')}}
+                                    </div>
+                                @endif
+                                @if($errors->any())
+                                    <div class="alert alert-danger">
+                                        <ul>
+                                            @foreach($errors->all() as $error)
+                                                <li>{{$error}}</li>
+                                            @endforeach
+                                        </ul>
+                                    </div>
+                                @endif
                                 <div class="row">
                                     <div class="col-md-12 col-12">
                                         <div class="form-group">
                                             <label for="first-name-column">Başlık</label>
                                             <input type="text" id="first-name-column" required class="form-control"
-                                                   placeholder="Başlık" name="title" >
+                                                   placeholder="Başlık" name="title" value="{{$article->title}}" >
                                         </div>
                                     </div>
 
@@ -47,7 +47,7 @@
                                             <input type="file" id="last-name-column" class="form-control"
                                                    placeholder="Fotoğraf" name="image">
 
-                                                <img width="30%" height="30%" class="img-thumbnail" src="" alt="">
+                                                <img width="30%" height="30%" class="img-thumbnail" src="{{asset($article->image)}}" alt="">
 
                                         </div>
                                     </div>
@@ -56,7 +56,7 @@
                                         <div class="form-group">
                                             <label for="last-name-column">İçerik</label>
                                             <textarea name="description" id="description" cols="30" rows="10">
-
+                                                {{$article->description}}
                                         </textarea>
                                         </div>
                                     </div>

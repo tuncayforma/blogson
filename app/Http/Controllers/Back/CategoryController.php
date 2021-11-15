@@ -3,7 +3,10 @@
 namespace App\Http\Controllers\Back;
 
 use App\Http\Controllers\Controller;
+use App\Models\Article;
+use App\Models\Category;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -14,7 +17,8 @@ class CategoryController extends Controller
      */
     public function index()
     {
-        return view('back.pages.categories');
+        $categories = Category::all();
+        return view('back.pages.categories',compact('categories'));
     }
 
     /**
@@ -35,7 +39,14 @@ class CategoryController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'category_name'=>['min:3','required']
+        ]);
+        $category = new Category();
+        $category->name = $request->category_name;
+        $category->slug = Str::slug($request->category_name);
+        $category->save();
+        return redirect()->back()->with('success','Kategori başarılı bir şekilde oluşturuldu');
     }
 
     /**
@@ -69,7 +80,14 @@ class CategoryController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $request->validate([
+            'name'=>['min:3','required']
+        ]);
+        $category = Category::find($id);
+        $category->name = $request->name;
+        $category->slug = Str::slug($request->name);
+        $category->save();
+        return response()->json(['success','Kategori başarılı bir şekilde güncellendi']);
     }
 
     /**
@@ -80,6 +98,13 @@ class CategoryController extends Controller
      */
     public function destroy($id)
     {
-        //
+        $category = Category::find($id);
+        $category->delete();
+        return  response()->json(['success','Kategori başarılı bir şekilde silindi']);
+    }
+    public function switch($id,Request $request){
+        $category=Category::find($request->id);
+        $category->status=$request->statu=='true' ? 1 : 0;
+        $category->save();
     }
 }

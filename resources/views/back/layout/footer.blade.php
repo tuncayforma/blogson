@@ -16,6 +16,12 @@
 
 <script src="{{asset('back/dist')}}/assets/vendors/apexcharts/apexcharts.js"></script>
 <script src="{{asset('back/dist')}}/assets/js/pages/dashboard.js"></script>
+<script
+    src="https://code.jquery.com/jquery-3.6.0.js"
+    integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+    crossorigin="anonymous"></script>
+<script src="{{asset('back/dist/')}}/assets/js/extensions/sweetalert2.js"></script>
+<script src="{{asset('back/dist/')}}/assets/vendors/sweetalert2/sweetalert2.all.min.js"></script>
 
 <script src="{{asset('back/dist')}}/assets/js/main.js"></script>
 @yield('js')
